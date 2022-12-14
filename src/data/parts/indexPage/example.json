@@ -1,0 +1,12 @@
+{
+  "title": "Тестовый заголовок",
+  "part": "file::/parts/indexPage/blockName.json",
+  "button": {
+    "text": "test button"
+  },
+  "link": {
+    "text": "test link",
+    "url": "/",
+    "external": true
+  }
+}

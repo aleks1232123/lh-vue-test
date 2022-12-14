@@ -1,0 +1,57 @@
+@import './reset';
+@import './fonts';
+@import './transitions';
+
+html {
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
+}
+
+#app {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.container {
+  padding: 0 rem(16);
+  width: 100%;
+
+  @include breakpoint(sm) {
+    padding: 0;
+    margin: 0 auto;
+    width: rem(640);
+  }
+
+  @include breakpoint(md) {
+    width: rem(915);
+  }
+
+  @include breakpoint(lg) {
+    width: rem(1040);
+  }
+
+  @include breakpoint(xl) {
+    width: rem(1500);
+  }
+}
+
+[lazy] {
+  opacity: 0 !important;
+  transition: opacity $base-transition !important;
+}
+
+[lazy="loaded"] {
+  opacity: 1 !important;
+}

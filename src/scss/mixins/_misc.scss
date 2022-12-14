@@ -1,0 +1,121 @@
+@function rem($size) {
+  $rem: $size / 16;
+
+  @return #{$rem}rem;
+}
+
+@mixin fs($size, $lh: false, $weight: false) {
+  @if ($size) {
+    font-size: rem($size);
+  }
+
+  @if ($lh) {
+    $isInt: type-of($lh) == 'number' and round($lh) == $lh;
+    @if ($isInt) {
+      line-height: rem($lh);
+    } @else {
+      line-height: $lh;
+    }
+  }
+
+  @if ($weight) {
+    font-weight: $weight;
+  }
+}
+
+@mixin flex($flex: flex, $align:false, $justify:false, $dir:false, $wrap: false) {
+  display: $flex;
+
+  @if ($align) {
+    align-items: $align;
+  }
+
+  @if ($justify) {
+    justify-content: $justify;
+  }
+
+  @if ($wrap) {
+    flex-wrap: $wrap;
+  }
+
+  @if ($dir) {
+    flex-direction: $dir;
+  }
+}
+
+@mixin flexWidth($size, $fix: false) {
+  @if ($fix) {
+    $size: rem($size);
+  }
+
+  flex-basis: $size;
+  max-width: $size;
+}
+
+@mixin absoluteCover($pseudo: false, $bgColor: false, $opacity: false, $transition: false) {
+  @if ($pseudo) {
+    content: '';
+  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  @if ($bgColor) {
+    background-color: $bgColor;
+  }
+
+  @if ($opacity) {
+    opacity: $opacity;
+  }
+
+  @if ($transition) {
+    transition: $transition;
+  }
+}
+
+@mixin absoluteCenter($position: both) {
+  position: absolute;
+
+  @if ($position == 'vert') {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @if ($position == 'hor') {
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  @if ($position == 'both') {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin hover($pointer: false) {
+  @media (hover: hover) {
+    @if ($pointer) {
+      cursor: pointer;
+    }
+
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin mediaProp($prop, $args...) {
+  @each $bp, $value in keywords($args) {
+    @if ($bp == def) {
+      #{$prop}: $value;
+    }
+    @else {
+      @include breakpoint($bp) {
+        #{$prop}: $value;
+      }
+    }
+  }
+}

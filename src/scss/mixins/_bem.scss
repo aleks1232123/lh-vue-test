@@ -1,0 +1,39 @@
+@mixin block($parent) {
+  .#{$parent} {
+    @content;
+  }
+}
+
+@mixin element($parent, $name) {
+  .#{$parent}__#{$name} {
+    @content;
+  }
+}
+
+@mixin element-next($parent, $name) {
+  + .#{$parent}__#{$name} {
+    @content;
+  }
+}
+
+@mixin modifier($parent, $name) {
+  $length_check: str-length('#{$parent}') + 1;
+
+  /* stylelint-disable */
+  @if ($length_check == str-length('#{&}')) {
+    $subQuery: $parent;
+
+    @at-root &.#{$subQuery}--#{$name} {
+      @content;
+    }
+  } @else {
+    $length: str-length('.#{$parent} ');
+    $subQuery: str-slice('#{&}', $length + 1);
+    $query: '#{&}#{$subQuery}--#{$name}';
+
+    @at-root #{$query} {
+      @content;
+    }
+  }
+  /* stylelint-enable */
+}

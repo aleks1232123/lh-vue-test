@@ -1,0 +1,13 @@
+{
+  "logo": "file::/template/common.json",
+  "menu": [
+    {
+      "url": "#example",
+      "text": "Example link"
+    },
+    {
+      "url": "#example2",
+      "text": "Example link 2"
+    }
+  ]
+}

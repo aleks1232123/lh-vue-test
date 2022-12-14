@@ -1,0 +1,10 @@
+//- Vue-transitions
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity $ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}

@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "projectSlug": "foobar",
+    "projectName": "Foobar"
+  },
+  "main": {
+    "text": "Лайфхакер",
+    "url": "https://lifehacker.ru/",
+    "svg": "logo"
+  },
+  "partner": {
+    "text": "Cordiant",
+    "url": "https://cordiant.ru/",
+    "svg": "partner-logo"
+  },
+  "title": "title",
+  "caption": "caption"
+}

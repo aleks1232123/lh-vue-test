@@ -1,0 +1,73 @@
+$breakpoints_min: (
+  'xs': 375px,
+  'sm': 768px,
+  'md': 1024px,
+  'lg': 1280px,
+  'xl': 1920px,
+  'xxl': 2560px,
+);
+
+$breakpoints_max: (
+  'xs': 767px,
+  'sm': 1023px,
+  'md': 1279px,
+  'lg': 1919px,
+  'xxl': 2559px,
+);
+
+//- Functions
+
+@mixin breakpoint($breakpoint, $custom: false) {
+  @if ($custom) {
+    @media (min-width: #{$breakpoint}px) {
+      @content;
+    }
+  } @else {
+    //- If the key exists in the map
+    @if map-has-key($breakpoints_min, $breakpoint) {
+      //- Prints a media query based on the value
+      @media (min-width: map-get($breakpoints_min, $breakpoint)) {
+        @content;
+      }
+    }
+    //- If the key doesn't exist in the map
+    @else {
+      @error "Unfortunately, no value could be retrieved from `#{$breakpoint}`. " + "Available breakpoints are: #{map-keys($breakpoints_min)}.";
+    }
+  }
+}
+
+@mixin breakpoint_max($breakpoint, $custom: false) {
+  @if ($custom) {
+    @media (min-width: #{$breakpoint}px) {
+      @content;
+    }
+  } @else {
+    //- If the key exists in the map
+    @if map-has-key($breakpoints_max, $breakpoint) {
+      //- Prints a media query based on the value
+      @media (max-width: map-get($breakpoints_max, $breakpoint)) {
+        @content;
+      }
+    }
+    //- If the key doesn't exist in the map
+    @else {
+      @error "Unfortunately, no value could be retrieved from `#{$breakpoint}`. " + "Available breakpoints are: #{map-keys($breakpoints_max)}.";
+    }
+  }
+}
+
+@mixin media-between($min, $max) {
+  $min-size: map-get($breakpoints_min, $min);
+  $max-size: map-get($breakpoints_max, $max);
+
+  @if not map-has-key($breakpoints_min, $min) {
+    @error "Unfortunately, no value could be retrieved from `#{$min}`. " + "Available breakpoints are: #{map-keys($breakpoints_min)}.";
+  }
+  @if not map-has-key($breakpoints_max, $max) {
+    @error "Unfortunately, no value could be retrieved from `#{$max}`. " + "Available breakpoints are: #{map-keys($breakpoints_max)}.";
+  }
+  @if map-has-key($breakpoints_min, $min) and map_has_key($breakpoints_max, $max) {
+    @media (min-width: $min-size) and (max-width: $max-size) { @content; }
+  }
+}

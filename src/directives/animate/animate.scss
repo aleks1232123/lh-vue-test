@@ -1,0 +1,38 @@
+*[data-anim] {
+  will-change: transform, opacity;
+  transition: opacity, transform;
+
+  &[data-anim='fadeDown'] {
+    transform: translateY(-30px);
+    opacity: 0;
+    transition-duration: 0.8s;
+  }
+
+  &[data-anim='fadeUp'] {
+    transform: translateY(30px);
+    opacity: 0;
+    transition-duration: 0.8s;
+  }
+
+  &[data-anim='fadeIn'] {
+    //- just for example
+    //- better use transition for simple animations
+    animation: fadeIn paused both 1s;
+  }
+
+  &.animate {
+    opacity: 1;
+    transform: none;
+    animation-play-state: running;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
