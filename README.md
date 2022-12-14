@@ -1,3 +1,3 @@
-# lifehacker-vue-test-assignment
+# lh-vue-test-assignment
 
 не доделан адаптив и анимация переходов
